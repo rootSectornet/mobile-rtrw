@@ -32,6 +32,11 @@ dependencies:
   auto_size_text: ^2.1.0
   font_awesome_flutter: ^8.5.0
   md2_tab_indicator: ^1.0.2
+  indonesia: ^1.0.1
+  flutter_svg: ^0.17.1
+  dio: ^3.0.8
+  dismissible_expanded_list: ^0.3.1
+
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:indonesia/indonesia.dart';
 import 'package:kampungku/blocservice/Eventservicebloc.dart';
 import 'package:kampungku/model/event/event_model.dart';
 import 'package:kampungku/model/event/eventresponse.dart';
@@ -12,6 +13,7 @@ abstract class EventPresenterAbstract{
   set view (Eventview eventview){}
   set servicebloc (Eventservicebloc eventservicebloc){}
   void getData(){}
+  String waktu(String tanggal){}
 }
 
 
@@ -50,9 +52,15 @@ class EventPresenter implements EventPresenterAbstract{
     String url = "${this._eventModel.getEvent}?id=${this._eventModel.iD}&start=${this._eventModel.start}&limit=${this._eventModel.limit}";
     _rest.getMethod(url).then((res){
       Event event = Event.fromJson(res);
-      
       this._eventservicebloc.eventStreamsink.add(ApiResponse.completed(event.data));
     });
+  }
+
+  @override
+  String waktu(String c) {
+    // TODO: implement waktu
+    DateTime a = DateTime.parse(c);
+    return tanggal(a).toString();
   }
   
 
