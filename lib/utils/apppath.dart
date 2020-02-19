@@ -100,8 +100,11 @@ class AppPath{
 
   static const String host = "http://192.168.105.219/rtrw/";
   static const String getEvent = "v1/Event/";
-  static const String Sarana = "Sarana/getData";
+  static const String Sarana = "v1/Sarana/";
   static const String Login = "v1/Auth/";
+  static const String KategoriAduan = "v1/Aduan/kategori/";
+  static const String InstansiOptionAduan = "v1/Aduan/getOptionMyInstansi/";
+  static const String HistoryAduan = "v1/Aduan/getMyHistory/";
 
 
 

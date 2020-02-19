@@ -65,83 +65,91 @@ class _WrappingScreenState extends State<WrappingScreen> with SingleTickerProvid
             )
           ],
         ),
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(horizontal: 2),
-            children: <Widget>[
-              Align(
-                alignment: Alignment.center,
-                child: CircleAvatar(
-                  backgroundImage: AssetImage("assets/images/usr.jpg",),
-                  radius: 25,
-                ),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text("${this._user.nAMAWARGA}",style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.w700),),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text("${this._user.nOTELP}",style: TextStyle(fontSize: 12,color: Colors.grey,)),
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: Text("Warga Rt ${this._user.rT}/${this._user.rW} ${this._user.kELURAHAN}",style: TextStyle(fontSize: 12,color: Colors.grey,)),
-              ),
-              SizedBox(height: 12),
-
-              Align(
-                alignment: Alignment.center,
-                child: DefaultTabController(
-                  length: 3,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
+        body: SafeArea(
+          child: NestedScrollView(
+            scrollDirection: Axis.vertical,
+            physics: ClampingScrollPhysics(),
+            headerSliverBuilder: (BuildContext context, bool innerBooxScrolled){
+              return <Widget>[
+                SliverAppBar(
+                  pinned: true,
+                  elevation: 2,
+                  backgroundColor: Colors.white,
+                  bottom: PreferredSize(
+                    preferredSize: const Size.fromHeight(48.0),
+                    child: Container(
+                      height: 48.0,
+                      alignment: Alignment.center,
+                      child:
                       TabBar(
-                          controller: tabController,
-                          labelStyle: TextStyle(fontWeight: FontWeight.w700,color: Colors.black),
-                          labelColor: Colors.blueAccent,
-                          indicatorSize: TabBarIndicatorSize.label,
-                          unselectedLabelColor: Colors.black,
-                          isScrollable: true,
-                          indicator: MD2Indicator(
+                        controller: tabController,
+                        labelStyle: TextStyle(fontWeight: FontWeight.w700,color: Colors.black),
+                        labelColor: Colors.blueAccent,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        unselectedLabelColor: Colors.black,
+                        isScrollable: true,
+                        indicator: MD2Indicator(
                             indicatorHeight: 3,
                             indicatorColor: Colors.blueAccent,
                             indicatorSize: MD2IndicatorSize.normal
-                          ),
-                          tabs: <Widget>[
-                            Tab(text: "Acara & Kegiatan",),
-                            Tab(text: "Sarana & Prasrana",),
-                            Tab(text: "Aduan / Laporan",)
-                          ],
-                      ),
-
-                      Container(
-                        margin: EdgeInsets.only(top: 10),
-                      height: MediaQuery.of(context).size.height/1.5,
-                        child: TabBarView(
-                          controller: tabController,
-                          physics: NeverScrollableScrollPhysics(),
-                          children: <Widget>[
-                            Event(),
-                            Sarana(),
-                            Aduan()
-                          ],
                         ),
+                        tabs: <Widget>[
+                          Tab(text: "Acara & Kegiatan",),
+                          Tab(text: "Sarana & Prasrana",),
+                          Tab(text: "Aduan / Laporan",)
+                        ],
                       ),
-
-                    ],
+                    ),
+                  ),
+                  expandedHeight: 150,
+                  floating: true,
+                  flexibleSpace: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.pin,
+                    background: Container(
+                      color: Colors.white,
+                      padding: EdgeInsets.only(top: 12, left: 24, right: 24, bottom: 20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          Align(
+                            alignment: Alignment.center,
+                            child: CircleAvatar(
+                              backgroundImage: AssetImage("assets/images/usr.jpg",),
+                              radius: 25,
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text("${this._user.nAMAWARGA}",style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.w700),),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text("${this._user.nOTELP}",style: TextStyle(fontSize: 12,color: Colors.grey,)),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text("Warga Rt ${this._user.rT}/${this._user.rW} ${this._user.kELURAHAN}",style: TextStyle(fontSize: 12,color: Colors.grey,)),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
-
-
-            ],
+              ];
+            },
+            body:
+            TabBarView(
+              controller: tabController,
+              physics: NeverScrollableScrollPhysics(),
+              children: <Widget>[
+                Event(),
+                Sarana(),
+                Aduan()
+              ],
+            ),
           ),
         ),
+
       ),
     );
   }
