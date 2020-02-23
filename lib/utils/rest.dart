@@ -43,6 +43,21 @@ class Rest{
     }
 
 
+    Future<dynamic> formData(FormData form,String url,Function(int sent,int total) progres) async {
+      try{
+        Response response = await _dio.post(
+          url,
+          data: form,
+          onSendProgress: progres
+        );
+        return response.data;
+      }catch(error,stacktrace){
+        print("Exception occured: $error stackTrace: $stacktrace");
+        return null;
+      }
+    }
+
+
     Future<dynamic> get(String url) async {
       try {
         Response response = await _dio.get(url);

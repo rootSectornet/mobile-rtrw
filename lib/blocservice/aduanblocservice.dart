@@ -8,9 +8,17 @@ import 'package:kampungku/utils/apiresponse.dart';
 
 class Aduanservicebloc{
 
-  StreamController _streamController = new StreamController<ApiResponse<List<Aduan>>>();
-  StreamController _kategoriStreamController = new StreamController<ApiResponse<List<RootipModel>>>();
-  StreamController _instansiStreamController = new StreamController<ApiResponse<List<RootipModel>>>();
+  StreamController _streamController;
+  StreamController _kategoriStreamController;
+  StreamController _instansiStreamController;
+
+  Aduanservicebloc(){
+
+     _streamController = new StreamController<ApiResponse<List<Aduan>>>();
+     _kategoriStreamController = new StreamController<ApiResponse<List<RootipModel>>>.broadcast();
+     _instansiStreamController   = new StreamController<ApiResponse<List<RootipModel>>>.broadcast();
+  }
+
   StreamSink<ApiResponse<List<Aduan>>> get aduanStreamsink => _streamController.sink;
   StreamSink<ApiResponse<List<RootipModel>>> get kategoriStreamasink => _kategoriStreamController.sink;
   StreamSink<ApiResponse<List<RootipModel>>> get instansiStreamasink => _instansiStreamController.sink;
@@ -20,8 +28,8 @@ class Aduanservicebloc{
 
 
   dispose() {
-    _streamController?.close();
-    _kategoriStreamController?.close();
-    _instansiStreamController?.close();
+    _streamController.close();
+    _kategoriStreamController.close();
+    _instansiStreamController.close();
   }
 }

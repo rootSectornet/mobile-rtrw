@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:kampungku/fragment/loaderColor.dart';
 import 'package:kampungku/model/user/user_model.dart';
 import 'package:kampungku/presenter/login/loginpresenter.dart';
 import 'package:kampungku/utils/apppath.dart';
@@ -27,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> implements LoginView{
 
     AppPath.CheckUser().then((check){
       if(check){
-        Navigator.pushReplacementNamed(context, "/home");
+        Navigator.pushReplacementNamed(context, "/");
       }
     });
 
@@ -90,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> implements LoginView{
             Container(
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.only(left: 35,right: 35),
-              child: Form(
+              child: this._userModel.Isloading ? Center(child: LoaderColor(),) : Form(
                 key: _formkey,
                 child: Column(
                   children: <Widget>[
@@ -216,17 +217,17 @@ class _LoginScreenState extends State<LoginScreen> implements LoginView{
                       ),
                     ),
                     SizedBox(height: 20,),
-                    Center(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text("Lupa Password ? ",style: TextStyle(fontWeight: FontWeight.w600,color: Colors.grey),),
-                          InkWell(
-                            child:Text("Klik Disini ",style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black),),),
-                        ],
-                      ),
-                    )
+//                    Center(
+//                      child: Row(
+//                        crossAxisAlignment: CrossAxisAlignment.center,
+//                        mainAxisAlignment: MainAxisAlignment.center,
+//                        children: <Widget>[
+//                          Text("Lupa Password ? ",style: TextStyle(fontWeight: FontWeight.w600,color: Colors.grey),),
+//                          InkWell(
+//                            child:Text("Klik Disini ",style: TextStyle(fontWeight: FontWeight.w600,color: Colors.black),),),
+//                        ],
+//                      ),
+//                    )
                   ],
                 ),
               ),
@@ -255,7 +256,7 @@ class _LoginScreenState extends State<LoginScreen> implements LoginView{
   @override
   void onSuccess(String success) {
     // TODO: implement onSuccess
-    Navigator.pushReplacementNamed(context, "/home");
+    Navigator.pushReplacementNamed(context, "/");
   }
 
   @override

@@ -138,7 +138,7 @@ class LAMPIRAN {
   String iDRELASI;
   String fLAG;
   String uRL;
-  int sIZE;
+  String sIZE;
   String mIMETYPE;
 
   LAMPIRAN(
@@ -156,7 +156,7 @@ class LAMPIRAN {
     iDRELASI = json['ID_RELASI'];
     fLAG = json['FLAG'];
     uRL = json['URL'];
-    sIZE = json['SIZE'];
+    sIZE = "${json['SIZE']}";
     mIMETYPE = json['MIMETYPE'];
   }
 
@@ -167,7 +167,7 @@ class LAMPIRAN {
     data['ID_RELASI'] = this.iDRELASI;
     data['FLAG'] = this.fLAG;
     data['URL'] = this.uRL;
-    data['SIZE'] = this.sIZE;
+    data['SIZE'] = "${this.sIZE}";
     data['MIMETYPE'] = this.mIMETYPE;
     return data;
   }

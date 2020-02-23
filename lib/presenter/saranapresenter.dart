@@ -13,6 +13,7 @@ abstract class SaranaPresenterAbstract{
   set servicebloc (SaranaBlocService saranaBlocService){}
   void getData(){}
   String waktu(String tanggal){}
+  Future<void> refresh(){}
 }
 
 
@@ -51,7 +52,6 @@ class SaranaPresenter implements SaranaPresenterAbstract{
     String idrt = await AppPath.getIdRt();
     String url = "${AppPath.Sarana}?idrt=$idrt";
     _rest.get(url).then((res){
-      print("sds$res");
       SaranaResponse saranaResponse = SaranaResponse.fromJson(res);
       this._saranaBlocService.saranaStreamsink.add(ApiResponse.completed(saranaResponse.jenisSarana));
     });
@@ -64,6 +64,13 @@ class SaranaPresenter implements SaranaPresenterAbstract{
     return tanggal(a).toString();
   }
 
+
+  @override
+  Future<void> refresh() {
+    // TODO: implement refresh
+    this.getData();
+    return Future.value();
+  }
 
 
 

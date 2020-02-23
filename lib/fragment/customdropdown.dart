@@ -4,6 +4,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kampungku/parent/aduanprovider.dart';
 
 class RootipModel{
   final String id;
@@ -35,8 +36,10 @@ class RootipDrowpdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+//    final aduanprisenter = AduanProvider.of(context).aduanPresenter;
     return
       InkWell(
+//        onTap: (){aduanprisenter.test("13");},
         onTap: ()=>{tampilDialog(context)},
         child: Container(
           width:width,
@@ -67,6 +70,7 @@ class RootipDrowpdown extends StatelessWidget {
 
 
   tampilDialog(BuildContext context) async{
+
     FixedExtentScrollController controller = new FixedExtentScrollController();
     await showGeneralDialog(
       context: context,

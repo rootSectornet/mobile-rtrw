@@ -29,6 +29,7 @@ class LoginPresenter implements LoginPresenterAbstract{
     pass = this._userModel.password.text;
 
     this._userModel.Isloading = true;
+    this._loginView.refreshData(this._userModel);
     try{
       Map data = {
         'nik' : nik,
@@ -45,12 +46,18 @@ class LoginPresenter implements LoginPresenterAbstract{
           AppPath.setRt(userResponse.data.rT);
           AppPath.setRw(userResponse.data.rW);
           AppPath.setKelurahan(userResponse.data.kELURAHAN);
+          this._userModel.Isloading = false;
+          this._loginView.refreshData(this._userModel);
           this._loginView.onSuccess("${userResponse.message}");
         }else{
+          this._userModel.Isloading = false;
+          this._loginView.refreshData(this._userModel);
           this._loginView.onError("${userResponse.message}");
         }
       });
     }catch(E){
+      this._userModel.Isloading = false;
+      this._loginView.refreshData(this._userModel);
       print("$E");
     }
 

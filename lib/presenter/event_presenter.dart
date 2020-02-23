@@ -14,6 +14,8 @@ abstract class EventPresenterAbstract{
   set servicebloc (Eventservicebloc eventservicebloc){}
   void getData(){}
   String waktu(String tanggal){}
+  String bulan(String tannga){}
+  Future<void> refresh(){}
 }
 
 
@@ -60,7 +62,25 @@ class EventPresenter implements EventPresenterAbstract{
   String waktu(String c) {
     // TODO: implement waktu
     DateTime a = DateTime.parse(c);
-    return tanggal(a).toString();
+    return a.day.toString();
+  }
+
+  @override
+  String bulan(String tanngal) {
+    // TODO: implement bulan
+
+    List longMonth = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+    List shortMonth = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+
+    DateTime a = DateTime.parse(tanngal);
+    return shortMonth[a.month -1];
+  }
+
+  @override
+  Future<void> refresh() {
+    // TODO: implement refresh
+    this.getData();
+    return Future.value();
   }
   
 
